@@ -1,0 +1,236 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* -----------------------css reset end-------------------------------- */
+body {
+  font-family: 微軟正黑體; }
+
+.wrap {
+  max-width: 1024px;
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1; }
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+a {
+  -webkit-text-decoration-line: none;
+  text-decoration-line: none; }
+
+.clearFix {
+  clear: both; }
+
+/* ----------------------------all end------------------------------- */
+/* ----------------------------header start------------------------------- */
+.header {
+  background-image: url(../images/Hero.png);
+  background-repeat: no-repeat;
+  height: 520px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  padding: 1px; }
+  .header h1 {
+    font-size: 40px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 90px;
+    color: #ffffff; }
+  .header form {
+    display: block;
+    margin: 0 auto; }
+  .header #areaId {
+    display: block;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 50%;
+    height: 48px;
+    font-size: 18px;
+    border-radius: 3px;
+    border: 3px solid #fff;
+    opacity: 0.7;
+    color: black;
+    font-weight: bold;
+    margin-top: 90px; }
+  .header #areaId:hover {
+    cursor: pointer; }
+  .header .popularZone {
+    max-width: 80%;
+    height: auto;
+    -webkit-box-shadow: 1px 1px 5px gray;
+    box-shadow: 1px 1px 5px gray;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: 3px solid #fff;
+    background-color: #fff;
+    padding: 18px;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 80px; }
+    .header .popularZone h3 {
+      font-size: 18px; }
+    .header .popularZone ul {
+      margin-top: 10px; }
+      .header .popularZone ul li {
+        float: left; }
+        .header .popularZone ul li button {
+          width: 130px;
+          font-size: 20px;
+          padding: 11px;
+          border-radius: 5px;
+          border: 1px solid #fff;
+          color: #fff;
+          margin-left: 30px;
+          font-family: 微軟正黑體; }
+        .header .popularZone ul li button:hover {
+          opacity: 0.6;
+          cursor: pointer; }
+      .header .popularZone ul .LY {
+        background-color: #8A82CC; }
+      .header .popularZone ul .SM {
+        background-color: #FFA782; }
+      .header .popularZone ul .SS {
+        background-color: #F5D105; }
+      .header .popularZone ul .ZI {
+        background-color: #559AC8; }
+  .header .backHome {
+    position: fixed;
+    bottom: 1%;
+    right: 1%;
+    padding: 20px; }
+  .header .backHome a {
+    font-size: 30px;
+    color: gray; }
+
+.content {
+  line-height: 1.5;
+  padding: 2%; }
+  .content .divideLine {
+    height: 1px;
+    display: block;
+    border-top: 1px dashed #559AC8;
+    margin-bottom: 30px; }
+  .content .zoneTitle {
+    text-align: center;
+    font-size: 36px;
+    color: #8A82CC;
+    margin-bottom: 20px; }
+  .content .card {
+    width: 48%;
+    height: auto;
+    padding: 10px;
+    -webkit-box-shadow: 1px 1px 5px gray;
+    box-shadow: 1px 1px 5px gray;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin: 0 1%;
+    margin-bottom: 20px;
+    float: left; }
+    .content .card .cardHead {
+      height: 300px;
+      color: #fff;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden; }
+      .content .card .cardHead img {
+        display: block;
+        max-width: 100%;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        z-index: -1; }
+      .content .card .cardHead h2 {
+        float: left;
+        font-size: 24px;
+        position: absolute;
+        bottom: 10px;
+        left: 20px; }
+      .content .card .cardHead h3 {
+        float: right;
+        font-size: 16px;
+        position: absolute;
+        bottom: 10px;
+        right: 20px; }
+    .content .card .cardBody {
+      margin-left: 20px; }
+      .content .card .cardBody p {
+        overflow: hidden;
+        white-space: nowrap;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis; }
+      .content .card .cardBody img {
+        text-align: left;
+        margin-right: 10px; }
+      .content .card .cardBody .phone {
+        width: 60%;
+        float: left; }
+        .content .card .cardBody .phone img {
+          margin-right: 12px;
+          margin-left: 2px; }
+      .content .card .cardBody .ticket {
+        width: 40%;
+        float: right; }
+        .content .card .cardBody .ticket img {
+          float: left; }
+
+.footer {
+  background-color: #559AC8;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px; }
+  .footer h2 {
+    color: #fff;
+    font-size: 17px; }
+  .footer h3 {
+    color: #FFD366;
+    font-size: 17px; }
