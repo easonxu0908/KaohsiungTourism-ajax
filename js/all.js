@@ -16,6 +16,7 @@ xhr.onload = function () {
     let list = document.querySelector('.list');
     let popular = document.querySelector('.popularZone');
     let zoneTitleJS = document.querySelector('.zoneTitle');
+    let pagination = document.querySelector('.pagination');
 
     //撈出dataRecords裡區域的值
     let zoneName = [];
@@ -38,162 +39,197 @@ xhr.onload = function () {
         area.appendChild(newNode);
     }
 
-    //儲存每1頁景點字串的變數
-    let pageStr = '';
-    let pageStr2 = '';
-    let pageStr3 = '';
-    let pageStr4 = '';
+    let dataFilter = [];
+    // 將查詢區域的資料放入到新的陣列
+    function queryArea(areaName) {
+        // 清空
+        dataFilter = [];
+        for (let i = 0; i < dataRecords.length; i++) {
+            // console.log(dataFilter[i].Zone);
+            if (dataRecords[i].Zone == areaName) {
+                dataFilter.push(dataRecords[i]);
+            }
+        }
+        // console.log(dataFilter)
+    }
 
-    //區域的選項功能
+
+    //"區域"選項
     function updateList(e) {
-        let select = e.target.value;
-        //儲存被選取區域名稱的變數
-        let strTitle = '';
-        let str = '';
-        //儲存被選取區域所有景點的陣列
-        let selectedRecords = [];
-        let len2 = selectedRecords.length;
-        for (let i = 0; i < len; i++) {
-            const name = dataRecords[i].Name;
-            const zone = dataRecords[i].Zone;
-            const opentime = dataRecords[i].Opentime;
-            const add = dataRecords[i].Add;
-            const tel = dataRecords[i].Tel;
-            const ticket = dataRecords[i].Ticketinfo;
-            const picture = dataRecords[i].Picture1;
-            if (select == zone) {
-                strTitle = `${zone}`
-                str =
-                    `<li class="card">
-                <div class="cardHead">
-                    <img src=${picture} alt="">
-                    <h2>${name}</h2>
-                    <h3>${zone}</h3>
-                    <div class="clearFix"></div>
-                </div>
-                <div class="cardBody">
-                    <p title="${opentime}"><img src="./images/icons_clock.png" alt="">${opentime}</p>
-                    <p title="${add}"><img src="./images/icons_pin.png" alt="">${add}</p>
-                    <div>
-                        <p class="phone" title="${tel}"><img src="./images/icons_phone.png" alt="">${tel}</p>
-                        <p class="ticket" title="${ticket}"><img src="./images/icons_tag.png" alt="">${ticket}</p>
-                        <div class="clearFix"></div>
-                    </div>
-                </div>
-            </li>`
-                selectedRecords.push(str);
-            }
-        }
-        //清空變數與設定變數值
-        len2 = selectedRecords.length;
-        pageStr = '';
-        pageStr2 = '';
-        pageStr3 = '';
-        pageStr4 = '';
-        //每頁pageStr最多只存取6個景點
-        if (len2 <= 6) {
-            //儲存0~6個景點景點字串
-            for (let i = 0; i < len2; i++) {
-                pageStr += selectedRecords[i];
-            }
-        } else if (len2 > 6 && len2 <= (6 * 2)) {
-            for (let i = 0; i < 6; i++) {
-                pageStr += selectedRecords[i];
-            }//儲存7~12個景點景點字串
-            for (let i = 6; i < len2; i++) {
-                pageStr2 += selectedRecords[i];
-            }
-        } else if (len2 >= (6 * 2) && len2 <= (6 * 3)) {
-            for (let i = 0; i < 6; i++) {
-                str2 += selectedRecords[i];
-            }
-            for (let i = 6; i < (6 * 2); i++) {
-                pageStr2 += selectedRecords[i];
-            }//儲存13~18個景點景點字串(目前1區最多12個景點)
-            for (let i = (6 * 2); i < len2; i++) {
-                pageStr3 += selectedRecords[i];
-            }
-        } else if (len2 >= (6 * 3) && len2 <= (6 * 4)) {
-            for (let i = 0; i < 6; i++) {
-                str2 += selectedRecords[i];
-            }
-            for (let i = 6; i < (6 * 2); i++) {
-                pageStr2 += selectedRecords[i];
-            }
-            for (let i = (6 * 2); i < (6 * 3); i++) {
-                pageStr3 += selectedRecords[i];
-            }//儲存19~24個景點景點字串(目前1區最多12個景點)
-            for (let i = (6 * 3); i < len2; i++) {
-                pageStr4 += selectedRecords[i];
-            }
-        }
-        //標題區域名稱
-        zoneTitleJS.innerHTML = strTitle;
-        //預設被選取區域景點為第1頁
-        list.innerHTML = pageStr;
-
-        //設定分頁按鈕變數
-        let paginationStr = '';
-        //當景點在6個以下時，不顯示分頁按鈕
-        if (len2 <= 6) {
-            pagination.innerHTML = '';
-            //當景點在7~12個時，顯示2個分頁按鈕
-        } else if (len2 > 6 && len2 <= (6 * 2)) {
-            paginationStr = ` <li><a class="active" href="#">1</a></li>
-            <li><a href="#">2</a></li>`
-            pagination.innerHTML = paginationStr;
-            //當景點在13~18個時，顯示3個分頁按鈕(目前1區最多12個景點)
-        } else if (len2 >= (6 * 2) && len2 <= (6 * 3)) {
-            paginationStr = ` <li><a class="active" href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>`
-            pagination.innerHTML = paginationStr;
-            //當景點在19~24個時，顯示3個分頁按鈕(目前1區最多12個景點)
-        } else if (len2 >= (6 * 3) && len2 <= (6 * 4)) {
-            paginationStr = ` <li><a class="active" href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>`
-            pagination.innerHTML = paginationStr;
+        let objValue = e.target.value;
+        if (objValue != "") {
+            queryArea(objValue);
+            renderContent(1);
         }
     }
 
-    // 分頁按鈕功能
-    function paginationJS(e) {
-        //取消該元素預設功能
-        e.preventDefault();
-        //點擊非a元素則跳出函數
-        if (e.target.nodeName !== "A") { return };
-        // console.log(e.target.text);
-        //設定變數取得該按鈕的值
-        let pageText = e.target.text;
-        //第1頁顯示第0~6個景點
-        if (pageText == '1') {
-            list.innerHTML = pageStr;
-        } //第2頁顯示第7~12個景點
-        else if (pageText == '2') {
-            list.innerHTML = pageStr2;
-        } //第3頁顯示第13~18個景點
-        else if (pageText == '3') {
-            list.innerHTML = pageStr3;
-        } //第4頁顯示第18~24個景點
-        else if (pageText == '4') {
-            list.innerHTML = pageStr4;
-        }
-    }
-    //熱門行政區的選項功能
+    //"熱門行政區"選項
     function popularArea(e) {
-        //點擊非botton元素則跳出函數
-        if (e.target.nodeName !== "BUTTON") { return };
-        //將熱門行政區的名稱導入函數updateList()。這太強大了，立刻省去後續相同的程式碼。
-        updateList(e);
+        // 點選button標籤在執行
+        if (e.target.nodeName == 'BUTTON') {
+            queryArea(e.target.textContent);
+            renderContent(1);
+        }
     }
-    //監聽"區域"選項
-    area.addEventListener('change', updateList, false)
-    //監聽"熱門行政區"選項
-    popular.addEventListener('click', popularArea, false)
-}
 
+    // 目前頁數、總頁數、總資料筆數
+    let currentPage, totoalPage, totalItem;
+    // 一頁6筆資料
+    let perPage = 6;
+
+    //分頁選項
+    function paginationJS(e) {
+        e.preventDefault();
+        if (e.target.nodeName == 'A') {
+            // 要前往哪一頁的變數
+            let goPage;
+            // 當上一頁或下一頁的變數
+            let pervNext = Number(e.target.dataset.num);
+            // 當點選上一頁或下一頁
+            if (pervNext == -1 || pervNext == 1) {
+                //上一頁
+                if (pervNext == -1) {
+                    if (currentPage + pervNext < 1) {
+                        return false;
+                    }
+                    goPage = currentPage - 1;
+                    //下一頁
+                } else if (pervNext == 1) {
+                    if (currentPage + pervNext > totoalPage) {
+                        return false;
+                    }
+                    goPage = currentPage + 1;
+                }
+            } else {
+                //直接點選分頁頁數
+                goPage = Number(e.target.dataset.page);
+                if (currentPage == goPage) {
+                    return false;
+                }
+            }
+            renderContent(goPage);
+        }
+    }
+
+
+
+
+    // 渲染有幾頁用
+    function renderPage() {
+        // 沒有資料或資料小於6筆的時候，不顯示頁數
+        if (dataFilter.length <= 0 || dataFilter.length <= 6) {
+            pagination.style.display = 'none';
+        } else {
+            pagination.style.display = '';
+            // 模板
+            let prevPage = `<li><a href="#" data-num="-1">«</a> </li>`;
+            let nexPage = ` <li><a href="#" data-num="1">»</a></li>`;
+            if (totoalPage > 0) {
+                let nbrHtml = '';
+                for (let i = 0; i < totoalPage; i++) {
+                    let tempNbr = `<li ><a  href="#" data-page="${(i + 1)}">${(i + 1)}</a> </li>`;
+                    nbrHtml += tempNbr;
+                }
+                pagination.innerHTML = prevPage + nbrHtml + nexPage;
+            }
+        }
+    }
+
+
+
+    // 渲染內容(第一次call api跟換頁功能共用方法 )
+    //goPage 要前往的頁數
+    function renderContent(goPage) {
+
+        // document.querySelector('.fotter').style.display = '';
+
+        totalItem = dataFilter.length;
+
+        // 當沒有查詢到資料的時候
+        if (totalItem == 0) {
+            zoneTitleJS.textContent = '查無資料';
+            list.innerHTML = '';
+            pagination.style.display = 'none';
+            return false;
+        }
+        // 有資料的時候只要取第一筆的name即可
+        zoneTitleJS.textContent = dataFilter[0].Zone;
+
+        // 計算總共有幾頁(使用無條件進位)
+        totoalPage = Math.ceil(totalItem / perPage);
+
+
+        // 起始資料變數,結束資料變數
+        let startItem;
+        let endItem;
+
+        //要前往的頁數是最後一頁
+        if (goPage == totoalPage) {
+            //剩餘資料 = 總資料筆數-(總頁數* 每頁資料6筆)
+            let minusItem = totalItem - (totoalPage * perPage);
+
+            if (minusItem == 0) { //判斷最後一頁是幾筆用,0就是6筆
+                startItem = ((totoalPage - 1) * perPage);
+                endItem = totalItem;
+            } else { // 小於6筆
+                startItem = ((totoalPage - 1) * perPage);
+                endItem = totalItem;
+            }
+        } else {
+            startItem = perPage * (goPage - 1);
+            endItem = (goPage * 6);
+        }
+        // 渲染頁面
+        let strHtml = '';
+
+        for (let i = startItem; i < endItem; i++) {
+            let name = dataFilter[i].Name;
+            let zone = dataFilter[i].Zone;
+            let opentime = dataFilter[i].Opentime;
+            let add = dataFilter[i].Add;
+            let tel = dataFilter[i].Tel;
+            let ticket = dataFilter[i].Ticketinfo;
+            let picture = dataFilter[i].Picture1;
+            let tempHtml =
+                `<li class="card">
+                     <div class="cardHead">
+                         <img src=${picture} alt="">
+                         <h2>${name}</h2>
+                         <h3>${zone}</h3>
+                         <div class="clearFix"></div>
+                     </div>
+                     <div class="cardBody">
+                         <p title="${opentime}"><img src="./images/icons_clock.png" alt="">${opentime}</p>
+                         <p title="${add}"><img src="./images/icons_pin.png" alt="">${add}</p>
+                         <div>
+                             <p class="phone" title="${tel}"><img src="./images/icons_phone.png" alt="">${tel}</p>
+                             <p class="ticket" title="${ticket}"><img src="./images/icons_tag.png" alt="">${ticket}</p>
+                             <div class="clearFix"></div>
+                         </div>
+                     </div>
+                 </li>`
+
+
+            strHtml += tempHtml;
+        }
+
+        list.innerHTML = strHtml;
+
+        // 紀錄目前頁數用來點選上下頁用
+        currentPage = goPage;
+
+        // 渲染頁碼
+        renderPage(totoalPage);
+    }
+
+    //監聽"區域"選項
+    area.addEventListener('change', updateList, false);
+    //監聽"熱門行政區"選項
+    popular.addEventListener('click', popularArea, false);
+    //監聽"分頁"選項
+    pagination.addEventListener('click', paginationJS, false);
+
+}
 $(document).ready(function () {
     // 滑動回頁首 start
     $('.JQbackHomeIcon').click(function (event) {
@@ -203,4 +239,8 @@ $(document).ready(function () {
         }, 500);
     });
     // 滑動回頁首 end
+
+    $('a').on('click', function () {
+        console.log('click')
+    });
 })

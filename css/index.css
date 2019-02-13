@@ -151,6 +151,8 @@ a {
     font-size: 30px;
     color: gray; }
 
+/* ----------------------------header end------------------------------- */
+/* ----------------------------content start------------------------------- */
 .content {
   line-height: 1.5;
   padding: 2%; }
@@ -223,6 +225,29 @@ a {
         .content .card .cardBody .ticket img {
           float: left; }
 
+.pagination {
+  display: block;
+  text-align: center;
+  padding: 1px;
+  margin: 0 auto;
+  margin-top: 30px; }
+  .pagination li {
+    display: inline;
+    margin: 0 5px; }
+    .pagination li a {
+      color: black;
+      padding: 8px 16px;
+      border: 1px solid green;
+      text-decoration: none;
+      margin: 0 auto; }
+  .pagination .active a {
+    color: #fff;
+    background-color: green; }
+  .pagination li:hover a {
+    background-color: lightgreen; }
+
+/* ----------------------------content end------------------------------- */
+/* ----------------------------footer start------------------------------- */
 .footer {
   background-color: #559AC8;
   padding: 20px;
