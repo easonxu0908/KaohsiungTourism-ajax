@@ -254,7 +254,4 @@ $(document).ready(function () {
     });
     // 滑動回頁首 end
 
-    $('a').on('click', function () {
-        console.log('click')
-    });
 })
