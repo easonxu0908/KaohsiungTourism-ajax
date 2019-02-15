@@ -127,11 +127,26 @@ xhr.onload = function () {
             if (totoalPage > 0) {
                 let nbrHtml = '';
                 for (let i = 0; i < totoalPage; i++) {
-                    let tempNbr = `<li ><a  href="#" data-page="${(i + 1)}">${(i + 1)}</a> </li>`;
+                    let tempNbr = `<li ><a  href="#" data-page="${(i + 1)}" class="pages">${(i + 1)}</a> </li>`;
                     nbrHtml += tempNbr;
                 }
                 pagination.innerHTML = prevPage + nbrHtml + nexPage;
             }
+        }
+        let pages = document.querySelectorAll('.pages');
+        console.log(pages);
+        console.log(currentPage);
+        let page;
+        for (let index = 0; index < pages.length; index++) {
+            page = pages[index];
+            // console.log(page.dataset.page);
+            if (currentPage == page.dataset.page) {
+                // console.log('yes');
+                console.log(page);
+                page.style.backgroundColor = "green";
+                return page;
+            }
+            // 當目前的頁面與 pata-page 相同時，就將該按鈕上色
         }
     }
 
@@ -143,6 +158,7 @@ xhr.onload = function () {
 
         // document.querySelector('.fotter').style.display = '';
 
+        //總資料筆數
         totalItem = dataFilter.length;
 
         // 當沒有查詢到資料的時候
@@ -157,8 +173,6 @@ xhr.onload = function () {
 
         // 計算總共有幾頁(使用無條件進位)
         totoalPage = Math.ceil(totalItem / perPage);
-
-
         // 起始資料變數,結束資料變數
         let startItem;
         let endItem;
